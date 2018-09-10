@@ -24,7 +24,7 @@ logger.addHandler(file_handler)
 logged_in = True
 RTM_READ_DELAY = 1 # 1 second delay between reading from RTM
 DEFAULT = "-help"
-HELP = """-help"""
+HELP = "-help"
 BEETS = "beets?"
 EGGS = "eggs?"
 EXIT = "exit"
@@ -58,11 +58,18 @@ def parse_bot_commands(slack_events):
         If its not found, then this function returns None, None.
     """
     for event in slack_events:
-        print json.dumps(event, sort_keys=True, indent=4)
+        # print json.dumps(event, sort_keys=True, indent=4)  
         if event["type"] == "message" and not "subtype" in event:
             user_id, message = parse_direct_mention(event["text"])
             if user_id == starterbot_id:
                 return message, event["channel"]
+        elif event["type"] == "hello":
+            # Sends initial greeting to channel
+            slack_client.api_call(
+                "chat.postMessage",
+                channel="CCRPND1V4",
+                text="Here's Bobby! (type: -help)"
+            )
     return None, None
 
 
@@ -76,16 +83,14 @@ def parse_direct_mention(message_text):
     return (matches.group(1), matches.group(2).strip()) if matches else (None, None)
 
 
-def handle_command(command, channel):
+def handle_command(command):
     """
         Executes bot command if the command is known
     """
-    # Default response is help text for the user
-    default_response = "Not sure what you mean. Try *{}*.".format(DEFAULT)
-
     # Finds and executes the given command, filling in response
     response = None
     # This is where you start to implement more commands!
+    global logged_in
     if command.startswith(HELP):
         response = """Try these commands: beets? / eggs? / exit"""
     if command.startswith(BEETS):
@@ -93,13 +98,24 @@ def handle_command(command, channel):
     if command.startswith(EGGS):
         response = "I like those too..."
     if command.startswith(EXIT):
-        response = "exit"
+        logged_in = False
+        response = "Exiting..."
+        print("Connection failed. Exception traceback printed above.")
+        logger.info('Slackbot terminated.')
+    return response
 
+
+def exicute_command(command, channel):
+    """
+        Executes bot command if the command is known
+    """
+    # Default response is help text for the user
+    default_response = "Not sure what you mean. Try *{}*.".format(DEFAULT)
     # Sends the response back to the channel
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
-        text=response or default_response
+        text=command or default_response
     )
     
 if __name__ == "__main__":
@@ -123,13 +139,9 @@ if __name__ == "__main__":
         while logged_in:
             command, channel = parse_bot_commands(slack_client.rtm_read())
             if command:
-                handle_command(command, channel)
-            else:
-                # Sends the response back to the channel
-                slack_client.api_call(
-                    "chat.postMessage",
-                    text="Here's Bobby!"
-                )
+                cmd = handle_command(command)
+                exicute_command(cmd, channel)
+
             time.sleep(RTM_READ_DELAY)
     else:
         print("Connection failed. Exception traceback printed above.")
