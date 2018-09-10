@@ -85,7 +85,7 @@ def parse_direct_mention(message_text):
 
 def handle_command(command):
     """
-        Interpret commands and send them to 
+        Interpret commands and send them to execute_command
     """
     response = None
     # This is where you start to implement more commands!
@@ -101,12 +101,13 @@ def handle_command(command):
         response = "Exiting..."
         print("Connection failed. Exception traceback printed above.")
         logger.info('Slackbot terminated.')
+    logger.info('User initiated command: {}'.format(command)) 
     return response
 
 
 def execute_command(command, channel):
     """
-        Executes bot command
+        Executes bot command after handle_command runs
     """
     # Default response is help text for the user
     default_response = "Not sure what you mean. Try *{}*.".format(DEFAULT)
