@@ -85,9 +85,8 @@ def parse_direct_mention(message_text):
 
 def handle_command(command):
     """
-        Executes bot command if the command is known
+        Interpret commands and send them to 
     """
-    # Finds and executes the given command, filling in response
     response = None
     # This is where you start to implement more commands!
     global logged_in
@@ -105,9 +104,9 @@ def handle_command(command):
     return response
 
 
-def exicute_command(command, channel):
+def execute_command(command, channel):
     """
-        Executes bot command if the command is known
+        Executes bot command
     """
     # Default response is help text for the user
     default_response = "Not sure what you mean. Try *{}*.".format(DEFAULT)
@@ -140,7 +139,7 @@ if __name__ == "__main__":
             command, channel = parse_bot_commands(slack_client.rtm_read())
             if command:
                 cmd = handle_command(command)
-                exicute_command(cmd, channel)
+                execute_command(cmd, channel)
 
             time.sleep(RTM_READ_DELAY)
     else:
