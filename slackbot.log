@@ -1,0 +1,4 @@
+2018-09-11 13:21:16,107:bot.py:Slackbot initialized!
+2018-09-11 13:21:46,007:bot.py:User initiated command: beets?
+2018-09-11 13:22:01,228:bot.py:User initiated command: eggs?
+2018-09-11 15:40:27,650:bot.py: SIGINT recieved from the os: program terminated w/ ctr-c
