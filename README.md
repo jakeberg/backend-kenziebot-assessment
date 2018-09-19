@@ -1,4 +1,4 @@
-# This program uses python version 2.7
+# This program uses Python version 2.7
 
 This is a slackbot named Bob:
 

@@ -23,12 +23,6 @@ logger.addHandler(file_handler)
 # constants
 logged_in = True
 RTM_READ_DELAY = 1 # 1 second delay between reading from RTM
-DEFAULT = "-help"
-HELP = "-help"
-BEETS = "beets?"
-EGGS = "eggs?"
-EXIT = "exit"
-MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
 
 
 def signal_handler(sig_num, frame):
@@ -88,6 +82,12 @@ def handle_command(command):
         Interpret commands and send them to execute_command
     """
     response = None
+    DEFAULT = "-help"
+    HELP = "-help"
+    BEETS = "beets?"
+    EGGS = "eggs?"
+    EXIT = "exit"
+    MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
     # This is where you start to implement more commands!
     global logged_in
     if command.startswith(HELP):
@@ -127,9 +127,9 @@ if __name__ == "__main__":
     # Prints to log when program has started
     logger.info('Slackbot initialized!')
 
-    # instantiate Slack client
+    # Instantiate Slack client
     slack_client = SlackClient(os.getenv('SLACK_BOT_TOKEN'))
-    # starterbot's user ID in Slack: value is assigned after the bot starts up
+    # Starterbot's user ID in Slack: value is assigned after the bot starts up
     starterbot_id = None
 
     if slack_client.rtm_connect(with_team_state=False):
