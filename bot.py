@@ -7,6 +7,7 @@ from slackclient import SlackClient
 import signal
 import logging
 import json
+import socket
 
 env_path = os.path.join('./', '.env')
 from dotenv import load_dotenv
@@ -23,6 +24,8 @@ logger.addHandler(file_handler)
 # constants
 logged_in = True
 RTM_READ_DELAY = 1 # 1 second delay between reading from RTM
+MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
+DEFAULT = "-help"
 
 
 def signal_handler(sig_num, frame):
@@ -38,7 +41,7 @@ def signal_handler(sig_num, frame):
 
     global logged_in
     if sig_num == signal.SIGINT:
-        logger.info(" SIGINT recieved from the os: program terminated w/ ctr-c")
+        logger.info(" SIGINT recieved from the os: program interrupted")
         logged_in = False
     elif sig_num == signal.SIGTERM:
         logger.info(" SIGTERM recieved from the os: program terminated")
@@ -82,12 +85,11 @@ def handle_command(command):
         Interpret commands and send them to execute_command
     """
     response = None
-    DEFAULT = "-help"
     HELP = "-help"
     BEETS = "beets?"
     EGGS = "eggs?"
     EXIT = "exit"
-    MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
+
     # This is where you start to implement more commands!
     global logged_in
     if command.startswith(HELP):
@@ -124,24 +126,32 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
-    # Prints to log when program has started
-    logger.info('Slackbot initialized!')
-
     # Instantiate Slack client
     slack_client = SlackClient(os.getenv('SLACK_BOT_TOKEN'))
     # Starterbot's user ID in Slack: value is assigned after the bot starts up
     starterbot_id = None
 
+
     if slack_client.rtm_connect(with_team_state=False):
-        print("Starter Bot connected and running!")
+        print("Bob-bot connected and running!")
         # Read bot's user ID by calling Web API method `auth.test`
         starterbot_id = slack_client.api_call("auth.test")["user_id"]
+
         while logged_in:
             command, channel = parse_bot_commands(slack_client.rtm_read())
             if command:
                 cmd = handle_command(command)
                 execute_command(cmd, channel)
 
-            time.sleep(RTM_READ_DELAY)
+        time.sleep(RTM_READ_DELAY)
     else:
         print("Connection failed. Exception traceback printed above.")
+
+
+
+
+
+# except Exception as error:
+#                         print("asdfg")
+#                         logger.info(error)
+#                         logged_in = False

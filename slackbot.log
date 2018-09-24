@@ -1,4 +1,26 @@
-2018-09-11 13:21:16,107:bot.py:Slackbot initialized!
-2018-09-11 13:21:46,007:bot.py:User initiated command: beets?
-2018-09-11 13:22:01,228:bot.py:User initiated command: eggs?
-2018-09-11 15:40:27,650:bot.py: SIGINT recieved from the os: program terminated w/ ctr-c
+2018-09-19 16:42:46,317:bot.py:Slackbot initialized!
+2018-09-19 16:43:39,152:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:43:39,153:bot.py:HTTPSConnectionPool(host='slack.com', port=443): Max retries exceeded with url: /api/channels.list (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x106c795d0>: Failed to establish a new connection: [Errno 4] Interrupted system call',))
+2018-09-19 16:44:27,832:bot.py:Slackbot initialized!
+2018-09-19 16:44:34,961:bot.py:Slackbot initialized!
+2018-09-19 16:45:25,782:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:35,401:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:45,338:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:47,550:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:47,775:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:47,967:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:48,151:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:48,331:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:48,523:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:48,706:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:48,886:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:49,067:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:45:49,215:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:46:26,309:bot.py:Slackbot initialized!
+2018-09-19 16:46:59,716:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 16:47:24,469:bot.py:Slackbot initialized!
+2018-09-19 16:47:29,412:bot.py:HTTPSConnectionPool(host='slack.com', port=443): Max retries exceeded with url: /api/channels.list (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x10b4185d0>: Failed to establish a new connection: [Errno 50] Network is down',))
+2018-09-19 16:48:17,446:bot.py:Slackbot initialized!
+2018-09-19 16:48:30,009:bot.py:Slackbot initialized!
+2018-09-19 17:02:19,601:bot.py: SIGINT recieved from the os: program interrupted
+2018-09-19 17:16:48,836:bot.py: SIGINT recieved from the os: program interrupted
