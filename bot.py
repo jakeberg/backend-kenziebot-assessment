@@ -11,6 +11,7 @@ import json
 import socket
 import requests
 import json
+import random
 from dotenv import load_dotenv
 
 env_path = os.path.join('./', '.env')
@@ -20,6 +21,7 @@ load_dotenv(dotenv_path=env_path, verbose=True, override=True)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s:%(filename)s:%(message)s')
+file_handler = logging.FileHandler('slackbot.log')
 file_handler.setFormatter(formatter)
 rotation_handler = logging.handlers.RotatingFileHandler(
               'slackbot.log', maxBytes=20)
@@ -100,7 +102,7 @@ def nasa_api():
     result = json.loads(mars_stuff.content)
     photos_dict = result["photos"]
     photos_array = [pic['img_src'] for pic in photos_dict]
-    return photos_array[0]
+    return random.choice(photos_array)
 
 
 def handle_command(command):

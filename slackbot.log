@@ -114,3 +114,12 @@ Slackbot initialized
 2018-09-25 15:30:04,520:bot.py:Connection error, will retrying in 5 seconds...
 2018-09-25 15:30:07,699:bot.py: SIGINT recieved from the os: program interrupted
 2018-09-25 15:30:07,700:bot.py:Something happened and Bob-bot stopped.
+Slackbot initialized!
+ SIGINT recieved from the os: program interrupted
+Something happened and Bob-bot stopped.
+Slackbot initialized!
+User initiated command: nasa
+User initiated command: nasa
+Connection terminated by user's exit command.
+User initiated command: secret logout
+Something happened and Bob-bot stopped.
