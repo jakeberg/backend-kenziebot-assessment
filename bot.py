@@ -20,12 +20,10 @@ load_dotenv(dotenv_path=env_path, verbose=True, override=True)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s:%(filename)s:%(message)s')
-file_handler = logging.FileHandler('slackbot.log')
 file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
-# rotation_handler = logging.handlers.RotatingFileHandler(
-#               LOG_FILENAME, maxBytes=20, backupCount=5)
-# logger.addHandler(rotation_handler)
+rotation_handler = logging.handlers.RotatingFileHandler(
+              'slackbot.log', maxBytes=20)
+logger.addHandler(rotation_handler)
 
 # constants
 logged_in = True
@@ -35,6 +33,7 @@ DEFAULT = "-help"
 starterbot_id = None
 
 
+# This is just a test that shows you can raise your own exceptions
 class CustomError(Exception):
     pass
 
@@ -154,7 +153,7 @@ def execute_command(command, channel):
 def rtm_message_loop(slack_client):
     while logged_in:
         # This API call breaks the while loop if the test fails
-        # so that the exception handler in main will catch error
+        # so that the exception handler in "main" will catch error
         slack_client.api_call("api.test")
         # Runs commands if they are present
         command, channel = parse_bot_commands(slack_client.rtm_read())
@@ -177,18 +176,19 @@ if __name__ == "__main__":
 
             if slack_client.rtm_connect(with_team_state=False):
 
-                logger.info("Slackbot initialized")
+                logger.info("Slackbot initialized!")
 
                 # Read bot's user ID by calling Web API method `auth.test`
                 starterbot_id = slack_client.api_call("auth.test")["user_id"]
                 rtm_message_loop(slack_client)
 
             else:
-                logger.error("Connection error, will retrying in 5 seconds...")
+                logger.debug("Could not connect, will retry in 5 seconds...")
                 time.sleep(5)
 
         except Exception as e:
             logger.error(e)
+            logger.info("Connection error, will retry in 5 seconds")
             time.sleep(5)
 
     logger.error("Something happened and Bob-bot stopped.")
