@@ -1,6 +1,7 @@
 import unittest
 import bot
 
+
 class TestBotCommands(unittest.TestCase):
 
     def test_handle_command(self):
@@ -8,6 +9,7 @@ class TestBotCommands(unittest.TestCase):
         self.assertEqual(result, "I like 'em.")
         result = bot.handle_command("eggs?")
         self.assertEqual(result, "I like those too...")
+
 
 if __name__ == '__main__':
     unittest.main()
