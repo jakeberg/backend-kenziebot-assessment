@@ -114,7 +114,7 @@ def handle_command(command):
     """
     response = None
     HELP = "-help"
-    SUP = "Sup?"
+    SUP = "sup?"
     NASA = "nasa"
     RAISE = "raise"
     SECRET_EXIT = "secret logout"
