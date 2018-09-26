@@ -126,7 +126,7 @@ def handle_command(command):
     if command.startswith(HELP):
         response = """Try these commands: sup? / nasa"""
     if command.startswith(SUP):
-        response = "I'm a really fucking boring and I only do one thing... say nasa"
+        response = "I'm a really boring and I only do one thing... say nasa"
     if command.startswith(NASA):
         response = nasa_api()
     if command.startswith(SECRET_EXIT):

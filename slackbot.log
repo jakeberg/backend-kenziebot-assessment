@@ -27,3 +27,5 @@
 2018-09-26 09:50:18,537 : ERROR : bot.py : Something happened and Bob-bot stopped.
 2018-09-26 09:50:18,880 : WARNING : bot.py :  SIGINT recieved from the os: program interrupted
 2018-09-26 09:50:18,880 : ERROR : bot.py : Something happened and Bob-bot stopped.
+2018-09-26 10:49:46,622:bot.py:Something happened and Bob-bot stopped.
+2018-09-26 10:49:46,764:bot.py:Something happened and Bob-bot stopped.
