@@ -81,7 +81,7 @@ def parse_bot_commands(slack_events):
             slack_client.api_call(
                 "chat.postMessage",
                 channel="#general",
-                text="Here's Bobby! (type: -help)"
+                text="Here's Rover! (type: -help)"
             )
     return None, None
 
