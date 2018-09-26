@@ -80,7 +80,7 @@ def parse_bot_commands(slack_events):
             # Sends initial greeting to channel
             slack_client.api_call(
                 "chat.postMessage",
-                channel="CCRPND1V4",
+                channel="#general",
                 text="Here's Bobby! (type: -help)"
             )
     return None, None
