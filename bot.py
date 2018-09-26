@@ -6,7 +6,7 @@ import re
 from slackclient import SlackClient
 import signal
 import logging
-import logging.handlers
+from logging.handlers import RotatingFileHandler
 import json
 import socket
 import requests
@@ -19,13 +19,16 @@ load_dotenv(dotenv_path=env_path, verbose=True, override=True)
 
 # Builds custom logger
 logger = logging.getLogger(__name__)
+# file_handler = logging.FileHandler('slackbot.log')
+
+formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(filename)s : %(message)s')
+LOGFILE = "./slackbot.log"
+r_logger = RotatingFileHandler(LOGFILE, mode='a', maxBytes=5*1024*1024, 
+                                 backupCount=2, encoding=None, delay=0)
+r_logger.setFormatter(formatter)
+logger.addHandler(r_logger)
 logger.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s:%(filename)s:%(message)s')
-file_handler = logging.FileHandler('slackbot.log')
-file_handler.setFormatter(formatter)
-# rotation_handler = logging.handlers.RotatingFileHandler('slackbot.log', maxBytes=20)
-# logger.addHandler(rotation_handler)
-logger.addHandler(file_handler)
+
 
 # Constants
 logged_in = True
@@ -111,8 +114,7 @@ def handle_command(command):
     """
     response = None
     HELP = "-help"
-    BEETS = "beets?"
-    EGGS = "eggs?"
+    SUP = "Sup?"
     NASA = "nasa"
     RAISE = "raise"
     SECRET_EXIT = "secret logout"
@@ -122,11 +124,9 @@ def handle_command(command):
     if command.startswith(RAISE):
         raise CustomError("what the hell happened???")
     if command.startswith(HELP):
-        response = """Try these commands: beets? / eggs? / nasa"""
-    if command.startswith(BEETS):
-        response = "I like 'em."
-    if command.startswith(EGGS):
-        response = "I like those too..."
+        response = """Try these commands: sup? / nasa"""
+    if command.startswith(SUP):
+        response = "I'm a really fucking boring and I only do one thing... say nasa"
     if command.startswith(NASA):
         response = nasa_api()
     if command.startswith(SECRET_EXIT):
