@@ -1,6 +1,6 @@
 # This program uses Python version 2.7
 
-This is a slackbot named Bob:
+This is a slackbot named Rover:
 
 # How to start this program:
 
@@ -17,10 +17,10 @@ Note: You will need a special .env file for the slackbot token. This will not be
 
 # How to interact with Bob-bot:
 
-Currently, there are only four things that Bob responds to. 
-If you are in the same Slack channel as Bob, ping him with @BOB and enter these commands:
+Currently, there are only four things that Rover responds to. 
+If you are in the same Slack channel as Rover, ping him with @rover and enter these commands:
 
 1. -help
-2. beets?
-3. eggs?
+2. sup?
+3. nasa
 4. exit

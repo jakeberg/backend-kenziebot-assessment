@@ -19,8 +19,6 @@ load_dotenv(dotenv_path=env_path, verbose=True, override=True)
 
 # Builds custom logger
 logger = logging.getLogger(__name__)
-# file_handler = logging.FileHandler('slackbot.log')
-
 formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(filename)s : %(message)s')
 LOGFILE = "./slackbot.log"
 r_logger = RotatingFileHandler(LOGFILE, mode='a', maxBytes=5*1024*1024, 
@@ -124,7 +122,7 @@ def handle_command(command):
     if command.startswith(RAISE):
         raise CustomError("what the hell happened???")
     if command.startswith(HELP):
-        response = """Try these commands: sup? / nasa"""
+        response = "Try these commands: sup? / nasa"
     if command.startswith(SUP):
         response = "I'm a really boring and I only do one thing... say nasa"
     if command.startswith(NASA):
@@ -157,10 +155,14 @@ def rtm_message_loop(slack_client):
         # so that the exception handler in "main" will catch error
         slack_client.api_call("api.test")
         # Runs commands if they are present
-        command, channel = parse_bot_commands(slack_client.rtm_read())
-        if command:
-            cmd = handle_command(command)
-            execute_command(cmd, channel)
+        try:
+            command, channel = parse_bot_commands(slack_client.rtm_read())
+            if command:
+                cmd = handle_command(command)
+                execute_command(cmd, channel)
+        except CustomError as e:
+            logger.info("something happened")
+            logger.error(e)
         time.sleep(RTM_READ_DELAY)
 
 if __name__ == "__main__":
@@ -192,4 +194,4 @@ if __name__ == "__main__":
             logger.info("Connection error, will retry in 5 seconds")
             time.sleep(5)
 
-    logger.error("Something happened and Bob-bot stopped.")
+    logger.error("Something happened and Rover stopped.")
