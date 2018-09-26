@@ -23,11 +23,11 @@ logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s:%(filename)s:%(message)s')
 file_handler = logging.FileHandler('slackbot.log')
 file_handler.setFormatter(formatter)
-rotation_handler = logging.handlers.RotatingFileHandler(
-              'slackbot.log', maxBytes=20)
-logger.addHandler(rotation_handler)
+# rotation_handler = logging.handlers.RotatingFileHandler('slackbot.log', maxBytes=20)
+# logger.addHandler(rotation_handler)
+logger.addHandler(file_handler)
 
-# constants
+# Constants
 logged_in = True
 RTM_READ_DELAY = 1  # 1 second delay between reading from RTM
 MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
@@ -113,7 +113,6 @@ def handle_command(command):
     HELP = "-help"
     BEETS = "beets?"
     EGGS = "eggs?"
-    MORE = "more"
     NASA = "nasa"
     RAISE = "raise"
     SECRET_EXIT = "secret logout"
@@ -185,7 +184,7 @@ if __name__ == "__main__":
                 rtm_message_loop(slack_client)
 
             else:
-                logger.debug("Could not connect, will retry in 5 seconds...")
+                logger.error("Could not connect, will retry in 5 seconds...")
                 time.sleep(5)
 
         except Exception as e:
