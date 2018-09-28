@@ -15,7 +15,7 @@ This is a slackbot named Rover:
 
 Note: You will need a special .env file for the slackbot token. This will not be uploaded to github.
 
-# How to interact with Bob-bot:
+# How to interact with Rover-bot:
 
 Currently, there are only four things that Rover responds to. 
 If you are in the same Slack channel as Rover, ping him with @rover and enter these commands:
