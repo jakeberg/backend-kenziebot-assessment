@@ -18,10 +18,17 @@ load_dotenv(dotenv_path=env_path, verbose=True, override=True)
 
 # Builds custom logger
 logger = logging.getLogger(__name__)
-formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(filename)s : %(message)s')
+formatter = logging.Formatter(
+    '%(asctime)s : %(levelname)s : %(filename)s : %(message)s'
+    )
 LOGFILE = "./slackbot.log"
-r_logger = RotatingFileHandler(LOGFILE, mode='a', maxBytes=5*1024*1024, 
-                                 backupCount=2, encoding=None, delay=0)
+r_logger = RotatingFileHandler(
+    LOGFILE,
+    mode='a',
+    maxBytes=5*1024*1024,
+    backupCount=2,
+    encoding=None,
+    delay=0)
 r_logger.setFormatter(formatter)
 logger.addHandler(r_logger)
 logger.setLevel(logging.INFO)
@@ -32,6 +39,7 @@ RTM_READ_DELAY = 1  # 1 second delay between reading from RTM
 MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
 DEFAULT = "-help"
 starterbot_id = None
+
 
 # This is just a test that shows you can raise your own exceptions
 class CustomError(Exception):
@@ -88,13 +96,18 @@ def parse_direct_mention(message_text):
         If there is no direct mention, returns None.
     """
     matches = re.search(MENTION_REGEX, message_text)
-    # the first group contains the username, the second group contains remaining message
-    return (matches.group(1), matches.group(2).strip()) if matches else (None, None)
+    # the first group contains the username,
+    # the second group contains remaining message
+    return (
+        matches.group(1),
+        matches.group(2).strip()) if matches else (None, None)
 
 
 def nasa_api():
     # # Connect to Nasa client
-    nasa_site = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key="
+    nasa_site = (
+        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key="  # noqa
+        )
     nasa_token = os.getenv('NASA_API_KEY')
     mars_stuff = requests.get(nasa_site + nasa_token)
     result = json.loads(mars_stuff.content)
