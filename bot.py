@@ -10,7 +10,6 @@ from logging.handlers import RotatingFileHandler
 import json
 import socket
 import requests
-import json
 import random
 from dotenv import load_dotenv
 
@@ -27,14 +26,12 @@ r_logger.setFormatter(formatter)
 logger.addHandler(r_logger)
 logger.setLevel(logging.INFO)
 
-
 # Constants
 logged_in = True
 RTM_READ_DELAY = 1  # 1 second delay between reading from RTM
 MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
 DEFAULT = "-help"
 starterbot_id = None
-
 
 # This is just a test that shows you can raise your own exceptions
 class CustomError(Exception):
