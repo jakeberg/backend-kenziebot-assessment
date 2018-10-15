@@ -8,7 +8,6 @@ import signal
 import logging
 from logging.handlers import RotatingFileHandler
 import json
-import socket
 import requests
 import random
 from dotenv import load_dotenv
@@ -174,6 +173,7 @@ def rtm_message_loop(slack_client):
             logger.info("something happened")
             logger.error(e)
         time.sleep(RTM_READ_DELAY)
+
 
 if __name__ == "__main__":
 
